@@ -176,16 +176,26 @@ const ConnectedGUI = injectIntl(connect(
 // the hierarchy of HOC constructor calls clearer here; it has nothing to do with redux's
 // ability to compose reducers.
 const WrappedGui = compose(
+    // 提供本地化状态的高阶组件。
     LocalizationHOC,
+    // 提供封装组件错误边界的高阶组件,传入一个string类型的action，用于GA跟踪错误标签
     ErrorBoundaryHOC('Top Level App'),
+    // 加载字体高阶组件
     FontLoaderHOC,
+    // 从URL查询字符串获取参数并初始化redux状态的高阶组件
     QueryParserHOC,
+    // 提供通过id加载项目的行为的高阶组件。如果没有id，则加载默认的项目。
     ProjectFetcherHOC,
     TitledHOC,
+    // 提供项目保存功能的高阶组件
     ProjectSaverHOC,
+    // 监听VM事件的高阶组件
     vmListenerHOC,
+    // 发送VM事件的高阶组件
     vmManagerHOC,
+    // SB文件上传的高阶组件
     SBFileUploaderHOC,
+    // 连接云服务器的高阶组件
     cloudManagerHOC,
     systemPreferencesHOC
 )(ConnectedGUI);

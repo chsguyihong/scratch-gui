@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 // PostCss
 const autoprefixer = require('autoprefixer');
@@ -114,6 +115,11 @@ const base = {
                     force: true
                 }
             ]
+        }),
+        new CompressionPlugin({
+            test: /\.js$|\.html$|\.css/, // 匹配文件名
+            threshold: 2048, // 对超过10k的数据压缩
+            deleteOriginalAssets: false // 不删除源文件
         })
     ]
 };
